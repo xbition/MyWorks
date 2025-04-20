@@ -24,15 +24,25 @@
       padding: 2rem;
       animation: fadeIn 2s ease-in;
     }
-    .gallery img {
+    .item {
+      position: relative;
+      cursor: pointer;
+    }
+    .item img {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255,255,255,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .gallery img:hover {
+    .item:hover img {
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    .caption {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #ccc;
     }
     footer {
       text-align: center;
@@ -40,36 +50,77 @@
       background-color: #292929;
       animation: fadeInUp 1s ease-in-out;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Мои работы</h1>
+    <h1>Моё портфолио</h1>
     <p>3D модели и визуализации</p>
   </header>
 
   <section class="gallery">
-    <img src="robot.png" alt="Боевой мех">
-    <img src="cute_animal.png" alt="Милый зверёк">
+    <div class="item" ondblclick="openModal('robot.png')">
+      <img src="robot.png" alt="Боевой мех">
+      <div class="caption">Боевой мех — тяжёлый робот с пушками</div>
+    </div>
+    <div class="item" ondblclick="openModal('cute_animal.png')">
+      <img src="cute_animal.png" alt="Милый зверёк">
+      <div class="caption">Милый зверёк — пушистый персонаж для анимации</div>
+    </div>
+    <div class="item" ondblclick="openModal('dragon_model.png')">
+      <img src="dragon_model.png" alt="Сапфировый дракон">
+      <div class="caption">Сапфировый дракон — магическое существо в городе</div>
+    </div>
   </section>
 
+  <div class="modal" id="modal" ondblclick="closeModal()">
+    <img id="modal-img" src="" alt="Увеличенное изображение">
+  </div>
+
   <footer>
-    <p>© 2025 Для связи:araik1759@gmail.com</p>
+    <p>© 2025 Твоё имя или ник</p>
   </footer>
+
+  <script>
+    function openModal(src) {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      modalImg.src = src;
+      modal.style.display = 'flex';
+    }
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+  </script>
 </body>
 </html>
